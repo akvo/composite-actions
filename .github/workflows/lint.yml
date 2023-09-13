@@ -13,4 +13,4 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Lint .sh scripts
-        run: ./helpers/lint.sh
+        run: ./helpers/general/lint.sh
