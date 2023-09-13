@@ -24,4 +24,4 @@ image_build () {
 }
 
 
-image_build ${1} ${2} ${3} ${4}
+image_build "${1}" "${2}" "${3}" "${4}"

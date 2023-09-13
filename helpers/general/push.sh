@@ -25,4 +25,4 @@ push_image () {
 }
 
 auth
-push_image ${1} ${2} ${3}
+push_image "${1}" "${2}" "${3}"
