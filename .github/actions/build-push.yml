@@ -1,0 +1,31 @@
+name: Build and Push
+
+inputs:
+  app-name:
+    description: 'Application Name'
+    required: true
+    type: string
+  service-name:
+    description: 'Service Name'
+    required: true
+    type: string
+  dockerfile-location:
+    description: 'Location of Dockerfile'
+    required: true
+    type: string
+
+
+runs:
+  using: "composite"
+  steps:
+    - name: Build
+      run: ./composite-actions/helpers/general/build.sh ${{ inputs.app-name }} ${{ inputs.service-name }} $GITHUB_REF_NAME.$GITHUB_SHA ${{ inputs.dockerfile-location }}
+      shell: bash
+
+    - name: Write secret to file
+      run: echo "${{ secrets.GCLOUD_SERVICE_ACCOUNT }}" | base64 --decode > gcp.json
+      shell: bash
+
+    - name: Push
+      run: ./composite-actions/helpers/general/push.sh  ${{ inputs.app-name }} ${{ inputs.service-name }} $GITHUB_REF_NAME.$GITHUB_SHA
+      shell: bash

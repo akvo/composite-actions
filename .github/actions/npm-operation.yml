@@ -1,0 +1,19 @@
+name: NPM Operation
+
+inputs:
+  node-version:
+    description: 'Node version'
+    required: true
+    type: string
+  npm-command:
+    description: 'NPM Command that will be executed'
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+    - name: NPM command execution
+      run: ./composite-actions/helpers/node/npm-operation.sh ${{ inputs.node-version }} "${{ inputs.npm-command }}"
+      shell: bash
+

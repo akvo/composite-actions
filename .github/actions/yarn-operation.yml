@@ -1,0 +1,10 @@
+name: Yarn Operation
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Yarn install and build
+      run: ./composite-actions/helpers/node/yarn-operation.sh
+      shell: bash
+
