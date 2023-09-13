@@ -13,10 +13,9 @@ registry="eu.gcr.io"
 image_prefix="${registry}/${gcloud_project}/${1}"
 
 image_build () {
-    repo_name="${1}"
-    service_name="${2}"
-    image_version="${3}"
-    dockerfile_location="${4}"
+    service_name="${1}"
+    image_version="${2}"
+    dockerfile_location="${3}"
 
     cd "${dockerfile_location}" && docker build \
         --tag "${image_prefix}/${service_name}:latest-test" \
@@ -24,4 +23,4 @@ image_build () {
 }
 
 
-image_build "${1}" "${2}" "${3}" "${4}"
+image_build "${1}" "${2}" "${3}"
