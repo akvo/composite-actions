@@ -12,7 +12,7 @@ runs:
   using: "composite"
   steps:
     - name: Node Command Execution
-      working-directory: ../src
+      working-directory: src
       run: ../composite-actions/helpers/node/node-operation.sh ${{ inputs.node-version }} "${{ inputs.node-command }}"
       shell: bash
 
