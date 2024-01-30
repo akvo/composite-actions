@@ -10,7 +10,9 @@ inputs:
   dockerfile-location:
     description: 'Location of Dockerfile'
     required: true
-
+  gcloud-sa:
+    description: 'Google Cloud Service Account'
+    required: true
 
 runs:
   using: "composite"
@@ -20,7 +22,7 @@ runs:
       shell: bash
 
     - name: Write secret to file
-      run: echo "${{ secrets.GCLOUD_SERVICE_ACCOUNT }}" | base64 --decode > gcp.json
+      run: echo "${{ inputs.gcloud-sa }}" | base64 --decode > gcp.json
       shell: bash
 
     - name: Push
