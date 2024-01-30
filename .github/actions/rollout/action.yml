@@ -1,15 +1,15 @@
 name: Rollout
 
-  inputs:
-    app-name:
-      description: 'Application Name'
-      required: true
-    service-name:
-      description: 'Service Name'
-      required: true
-    cluster-name:
-      description: 'Cluster Name'
-      required: true
+inputs:
+  app-name:
+    description: 'Application Name'
+    required: true
+  service-name:
+    description: 'Service Name'
+    required: true
+  cluster-name:
+    description: 'Cluster Name'
+    required: true
 
 
 runs:
