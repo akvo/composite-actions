@@ -4,15 +4,12 @@ inputs:
   app-name:
     description: 'Application Name'
     required: true
-    type: string
   service-name:
     description: 'Service Name'
     required: true
-    type: string
   dockerfile-location:
     description: 'Location of Dockerfile'
     required: true
-    type: string
 
 
 runs:

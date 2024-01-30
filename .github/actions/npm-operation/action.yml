@@ -4,11 +4,9 @@ inputs:
   node-version:
     description: 'Node version'
     required: true
-    type: string
   npm-command:
     description: 'NPM Command that will be executed'
     required: true
-    type: string
 
 runs:
   using: "composite"

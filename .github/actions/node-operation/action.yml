@@ -4,11 +4,9 @@ inputs:
   node-version:
     description: 'Node version'
     required: true
-    type: string
   node-command:
     description: 'Node command that will be executed'
     required: true
-    type: string
 
 runs:
   using: "composite"

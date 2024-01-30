@@ -4,15 +4,12 @@ name: Rollout
     app-name:
       description: 'Application Name'
       required: true
-      type: string
     service-name:
       description: 'Service Name'
       required: true
-      type: string
     cluster-name:
       description: 'Cluster Name'
       required: true
-      type: string
 
 
 runs:
