@@ -1,0 +1,25 @@
+name: Docker Push
+
+inputs:
+  app-name:
+    description: 'Application Name'
+    required: true
+  service-name:
+    description: 'Service Name'
+    required: true
+  gcloud-sa:
+    description: 'Google Cloud Service Account'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Write secret to file
+      working-directory: src
+      run: echo "${{ inputs.gcloud-sa }}" | base64 --decode > gcp.json
+      shell: bash
+
+    - name: Push
+      working-directory: src
+      run: ../composite-actions/helpers/general/push.sh  ${{ inputs.app-name }} ${{ inputs.service-name }} $GITHUB_REF_NAME.$GITHUB_SHA
+      shell: bash

@@ -9,7 +9,6 @@ gcloud_project="akvo-lumen"
 registry="eu.gcr.io"
 
 auth () {
-#    cat gcp.json
     gcloud auth activate-service-account --key-file=gcp.json
     gcloud config set project ${gcloud_project}
     gcloud config set container/cluster europe-west1-d
@@ -21,7 +20,6 @@ auth () {
 push_image () {
     prefix="${registry}/${gcloud_project}/${1}"
     docker push "${prefix}/${2}:${3}"
-    docker push "${prefix}/${2}:latest-test"
 }
 
 auth
