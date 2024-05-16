@@ -24,7 +24,7 @@ runs:
 
     - name: Git Pull
       working-directory: src
-      run: ../composite-actions/helpers/ssh-docker-compose/git-pul.sh ${{ inputs.server-ip }} ${{ inputs.server-ssh-port }} ${{ inputs.server-ssh-user }}
+      run: ../composite-actions/helpers/ssh-docker-compose/git-pull.sh ${{ inputs.server-ip }} ${{ inputs.server-ssh-port }} ${{ inputs.server-ssh-user }}
       shell: bash
 
     - name: Rebuild and up the Docker Compose
