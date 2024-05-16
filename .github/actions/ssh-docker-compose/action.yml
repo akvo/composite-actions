@@ -19,7 +19,7 @@ runs:
   steps:
     - name: Write secret to file
       working-directory: src
-      run: echo "${{ inputs.server-ssh-secret-key }}" > priv.key
+      run: echo "${{ inputs.server-ssh-secret-key }}" > priv.key && chmod 600 priv.key
       shell: bash
 
     - name: Git Pull
