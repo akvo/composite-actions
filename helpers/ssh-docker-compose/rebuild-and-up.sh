@@ -11,7 +11,7 @@ server_user="${3}"
 
 
 ssh -i priv.key -o BatchMode=yes \
-    -p ${server_port} \
+    -p "${server_port}" \
     -o UserKnownHostsFile=/dev/null \
     -o StrictHostKeyChecking=no \
-    ${server_user}@${server_ip} "cd src/ && docker compose build --no-cache && docker compose stop && docker compose up -d"
+    "${server_user}"@"${server_ip}" "cd src/ && docker compose build --no-cache && docker compose stop && docker compose up -d"
