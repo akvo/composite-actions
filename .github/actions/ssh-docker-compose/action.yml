@@ -1,4 +1,4 @@
-name: Docker Build
+name: Docker Compose Build and Restart
 
 inputs:
   server-ip:
