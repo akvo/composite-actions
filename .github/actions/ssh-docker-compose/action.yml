@@ -13,6 +13,11 @@ inputs:
   server-ssh-user:
     description: 'SSH User'
     required: true
+  docker-compose-file:
+    description: 'Docker compose file location'
+    required: true
+
+
 
 runs:
   using: "composite"
@@ -24,10 +29,10 @@ runs:
 
     - name: Git Pull
       working-directory: src
-      run: ../composite-actions/helpers/ssh-docker-compose/git-pull.sh ${{ inputs.server-ip }} ${{ inputs.server-ssh-port }} ${{ inputs.server-ssh-user }}
+      run: ../composite-actions/helpers/ssh-docker-compose/git-pull.sh ${{ inputs.server-ip }} ${{ inputs.server-ssh-port }} ${{ inputs.server-ssh-user }} ${{ inputs.docker-compose-file }}
       shell: bash
 
     - name: Rebuild and up the Docker Compose
       working-directory: src
-      run: ../composite-actions/helpers/ssh-docker-compose/rebuild-and-up.sh ${{ inputs.server-ip }} ${{ inputs.server-ssh-port }} ${{ inputs.server-ssh-user }}
+      run: ../composite-actions/helpers/ssh-docker-compose/rebuild-and-up.sh ${{ inputs.server-ip }} ${{ inputs.server-ssh-port }} ${{ inputs.server-ssh-user }} ${{ inputs.docker-compose-file }}
       shell: bash
