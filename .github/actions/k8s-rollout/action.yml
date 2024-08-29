@@ -4,8 +4,8 @@ inputs:
   app-name:
     description: 'Application Name'
     required: true
-  service-name:
-    description: 'Service Name'
+  deployment-name:
+    description: 'Deployment Name'
     required: true
   cluster-name:
     description: 'Cluster Name'
@@ -16,7 +16,9 @@ inputs:
   namespace-name:
     description: 'Namespace Name'
     required: true
-
+  container-name:
+    description: 'Container Name'
+    required: true
 
 runs:
   using: "composite"
@@ -37,5 +39,5 @@ runs:
       shell: bash
 
     - name: Rollout
-      run: ./composite-actions/helpers/general/k8s-rollout.sh  ${{ inputs.app-name }} ${{ inputs.service-name }}  $GITHUB_REF_NAME.$GITHUB_SHA ${{ inputs.cluster-name }} ${{ inputs.namespace-name }}
+      run: ./composite-actions/helpers/general/k8s-rollout.sh  ${{ inputs.app-name }} ${{ inputs.deployment-name }}  $GITHUB_REF_NAME.$GITHUB_SHA ${{ inputs.cluster-name }} ${{ inputs.container-name }} ${{ inputs.namespace-name }}
       shell: bash

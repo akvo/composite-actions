@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 set -exuo pipefail
 
-# ${1} for repo name
-# ${2} for service name
+# ${1} for app name
+# ${2} for deployment name
 # ${3} for image version
 # ${4} for cluster name
+# ${5} for container name
+# ${6} for namespace name
 
 gcloud_project="akvo-lumen"
 registry="eu.gcr.io"
@@ -21,6 +23,6 @@ auth () {
 
 auth
 
-kubectl set image deployment/"${1}" "${2}"="${registry}"/"${gcloud_project}"/"${1}"/"${2}":"${3}" --namespace="${5}" --timeout=300s
+kubectl set image deployment/"${2}" "${5}"="${registry}"/"${gcloud_project}"/"${1}"/"${5}":"${3}" --namespace="${6}"
 
-kubectl rollout status deployment/"${1}" --namespace="${5}" --timeout=300s
+kubectl rollout status deployment/"${2}" --namespace="${6}" --timeout=300s
