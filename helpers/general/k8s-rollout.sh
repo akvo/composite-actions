@@ -21,6 +21,6 @@ auth () {
 
 auth
 
-kubectl set image deployment/"${1}" "${2}"="${registry}"/"${gcloud_project}"/"${1}"/"${2}":"${3}"
+kubectl set image deployment/"${1}" "${2}"="${registry}"/"${gcloud_project}"/"${1}"/"${2}":"${3}" --namespace="${4}"
 
 kubectl rollout status deployment/"${1}"

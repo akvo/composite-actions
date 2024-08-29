@@ -1,4 +1,4 @@
-name: Rollout
+name: K8S Rollout
 
 inputs:
   app-name:
@@ -13,7 +13,9 @@ inputs:
   gcloud-sa:
     description: 'Google Cloud Service Account'
     required: true
-
+  namespace-name:
+    description: 'Namespace Name'
+    required: true
 
 
 runs:
@@ -35,5 +37,5 @@ runs:
       shell: bash
 
     - name: Rollout
-      run: ./composite-actions/helpers/general/rollout.sh  ${{ inputs.app-name }} ${{ inputs.service-name }}  $GITHUB_REF_NAME.$GITHUB_SHA ${{ inputs.cluster-name }}
+      run: ./composite-actions/helpers/general/k8s-rollout.sh  ${{ inputs.app-name }} ${{ inputs.service-name }}  $GITHUB_REF_NAME.$GITHUB_SHA ${{ inputs.cluster-name }} ${{ inputs.namespace-name }}
       shell: bash
