@@ -21,6 +21,6 @@ auth () {
 
 auth
 
-kubectl set image deployment/"${1}" "${2}"="${registry}"/"${gcloud_project}"/"${1}"/"${2}":"${3}" --namespace="${5}"
+kubectl set image deployment/"${1}" "${2}"="${registry}"/"${gcloud_project}"/"${1}"/"${2}":"${3}" --namespace="${5}" --timeout=300s
 
-kubectl rollout status deployment/"${1}" --namespace="${5}"
+kubectl rollout status deployment/"${1}" --namespace="${5}" --timeout=300s
