@@ -4,12 +4,14 @@ set -exuo pipefail
 # ${1} for repo name
 # ${2} for service name
 # ${3} for image version
+# ${4} for cluster name
 
 gcloud_project="akvo-lumen"
 registry="eu.gcr.io"
 image_prefix="${registry}/${gcloud_project}/${1}"
 service_name="${2}"
 image_version="${3}"
+cluster_name="${4}"
 
 auth () {
     gcloud auth activate-service-account --key-file=gcp.json
@@ -22,6 +24,7 @@ auth () {
 
 push_image () {
     docker push "${image_prefix}/${service_name}:${image_version}"
+    docker push "${image_prefix}/${service_name}:latest-${cluster_name}"
 }
 
 auth
