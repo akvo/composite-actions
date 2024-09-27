@@ -21,13 +21,13 @@ image_build () {
     if [ -d "${dockerfile_location}" ]; then
         # If it's a directory, change to that directory and build using the default Dockerfile
         cd "${dockerfile_location}" && docker build \
-            --tag "${image_prefix}/${service_name}:latest-{cluster_name}" \
+            --tag "${image_prefix}/${service_name}:latest-${cluster_name}" \
             --tag "${image_prefix}/${service_name}:${image_version}" .
     elif [ -f "${dockerfile_location}" ]; then
         # If it's a specific Dockerfile, change to the directory containing the Dockerfile
         dockerfile_dir="$(dirname "${dockerfile_location}")"
         dockerfile_name="$(basename "${dockerfile_location}")"
-        cd "${dockerfile_dir}" && docker build --tag "${image_prefix}/${service_name}:latest-{cluster_name}" \
+        cd "${dockerfile_dir}" && docker build --tag "${image_prefix}/${service_name}:latest-${cluster_name}" \
                                                   --tag "${image_prefix}/${service_name}:${image_version}" \
                                                   -f "${dockerfile_name}" .
     else
