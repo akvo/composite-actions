@@ -10,11 +10,14 @@ inputs:
   dockerfile-location:
     description: 'Location of Dockerfile'
     required: true
+  cluster-name:
+    description: 'Cluster Name'
+    required: true
 
 runs:
   using: "composite"
   steps:
     - name: Build
       working-directory: src
-      run: ../composite-actions/helpers/general/build.sh ${{ inputs.app-name }} ${{ inputs.service-name }} $GITHUB_REF_NAME.$GITHUB_SHA ${{ inputs.dockerfile-location }}
+      run: ../composite-actions/helpers/general/build.sh ${{ inputs.app-name }} ${{ inputs.service-name }} $GITHUB_REF_NAME.$GITHUB_SHA ${{ inputs.dockerfile-location }} ${{ inputs.cluster-name }} 
       shell: bash
