@@ -6,7 +6,6 @@ set -exuo pipefail
 # ${3} for namespace name
 
 gcloud_project="akvo-lumen"
-registry="eu.gcr.io"
 cluster_name=${2}
 
 auth () {
