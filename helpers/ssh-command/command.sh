@@ -17,4 +17,4 @@ ssh -i priv.key -o BatchMode=yes \
     -o StrictHostKeyChecking=no \
     -o TCPKeepAlive=yes \
     -o ServerAliveInterval=10 \
-    "${server_user}"@"${server_ip}" "cd src/ && ${command}"
+    "${server_user}"@"${server_ip}" "${command}"
