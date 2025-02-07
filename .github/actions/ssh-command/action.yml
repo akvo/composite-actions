@@ -1,0 +1,33 @@
+name: Execute Command over SSH
+
+inputs:
+  server-ip:
+    description: 'Server IP address'
+    required: true
+  server-ssh-port:
+    description: 'Server SSH port'
+    required: true
+  server-ssh-secret-key:
+    description: 'The SSH secret key from server'
+    required: true
+  server-ssh-user:
+    description: 'SSH User'
+    required: true
+  command:
+    description: 'The command'
+    required: true
+
+
+
+runs:
+  using: "composite"
+  steps:
+    - name: Write secret to file
+      working-directory: src
+      run: echo "${{ inputs.server-ssh-secret-key }}" > priv.key && chmod 600 priv.key
+      shell: bash
+
+    - name: Execute the command
+      working-directory: src
+      run: ../composite-actions/helpers/ssh-command/command.sh ${{ inputs.server-ip }} ${{ inputs.server-ssh-port }} ${{ inputs.server-ssh-user }} ${{ inputs.command }}
+      shell: bash
