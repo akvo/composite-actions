@@ -1,0 +1,33 @@
+name: Rsync to Server
+
+inputs:
+  server-ip:
+    description: 'Server IP address'
+    required: true
+  server-ssh-port:
+    description: 'Server SSH port'
+    required: true
+  server-ssh-user:
+    description: 'SSH User'
+    required: true
+  server-ssh-secret-key:
+    description: 'The SSH secret key from server'
+    required: true
+  source-directory:
+    description: 'Source directory to sync'
+    required: true
+  target-directory:
+    description: 'Target directory on the server'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Write secret to file
+      run: echo "${{ inputs.server-ssh-secret-key }}" > priv.key && chmod 600 priv.key
+      shell: bash
+
+    - name: Rsync files to server
+      run: |
+        rsync -avz -e "ssh -i priv.key -p ${{ inputs.server-ssh-port }} -o StrictHostKeyChecking=no" ${{ inputs.source-directory }} ${{ inputs.server-ssh-user }}@${{ inputs.server-ip }}:${{ inputs.target-directory }}
+      shell: bash
