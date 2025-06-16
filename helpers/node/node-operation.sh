@@ -9,4 +9,4 @@ docker run \
        --volume "$(pwd)/frontend:/app" \
        --workdir "/app" \
        --entrypoint /bin/sh \
-       akvo/akvo-node-18-alpine:20230831.105309.b9593b7 -c "${2}"
+       akvo/akvo-node-18-alpine:20250306.055839.23cadbd -c "${2}"
