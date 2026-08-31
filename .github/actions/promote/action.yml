@@ -1,0 +1,40 @@
+name: Promote Image to Production
+
+# Retag an image that was already built and tested by the test pipeline to the
+# production tags, without rebuilding. Uses `gcloud container images add-tag`,
+# which only moves manifest pointers (no layer pull/push) and fails if the
+# source (tested) image does not exist. Only the composite-actions checkout is
+# required (no application source checkout).
+
+inputs:
+  app-name:
+    description: 'Application Name (image path segment under the gcloud project)'
+    required: true
+  services:
+    description: 'Space-separated list of service names to promote'
+    required: true
+  gcloud-sa:
+    description: 'Google Cloud Service Account (base64 JSON key with registry write access)'
+    required: true
+  source-tag:
+    description: 'Existing image tag to promote FROM (an already-built, tested tag, e.g. main.<sha>)'
+    required: true
+  cluster-name:
+    description: 'Target cluster name; produces the :latest-<cluster> tag'
+    required: false
+    default: 'production'
+  version-tag:
+    description: 'Optional extra immutable tag to also create (e.g. <ref>.<sha>); skipped when empty or equal to source-tag'
+    required: false
+    default: ''
+
+runs:
+  using: "composite"
+  steps:
+    - name: Write secret to file
+      run: echo "${{ inputs.gcloud-sa }}" | base64 --decode > gcp.json
+      shell: bash
+
+    - name: Promote
+      run: ./composite-actions/helpers/general/promote.sh "${{ inputs.app-name }}" "${{ inputs.services }}" "${{ inputs.source-tag }}" "${{ inputs.cluster-name }}" "${{ inputs.version-tag }}"
+      shell: bash
